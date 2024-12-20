@@ -1,0 +1,22 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "Backend project",
+  "main": "app.js",
+  "scripts": {
+    "test": "Node Js",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "Exspress",
+    "project"
+  ],
+  "author": "Samaritdinov Muhammadrasul",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
