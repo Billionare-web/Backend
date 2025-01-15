@@ -1,41 +1,43 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const PostModel = require('./models/post.model');
+require('dotenv').config();
 
 const app = express();
+
 app.use(express.json());
 
-const PORT = 8080;
+// http CRUM -- create read , update, delete
 
-app.get("/home/blog", (req, res) => {
+// read -- get
+
+app.get("/api/get", (req, res) => {
   try {
     res.status(200).send("Hello world");
   } catch (error) {
-    console.log(error);
+    res.status(501).send(error);
   }
 });
 
-const DB_URL =
-  "mongodb+srv://Muhammadrasul:smb1102.m@cluster0.8ho8t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+app.post('/api/post', async (req, res) => {
+try {
+  const newPost = await PostModel.create(req.body);
+  res.status(201).send(newPost);
+} catch (error) {
+  res.status(501).send(error)
+}
+});
 
-const connectBDFunc = async () => {
-  try {
-    await mongoose.connect(DB_URL);
-    app.listen(PORT, () => {
-      console.log(`Listen to -- https://localhost:${PORT}`);
-    });
-    console.log("Connect to DB");
-  } catch (error) {
-    console.log(`Error in connect to DB -- ${error}`);
-  }
+const PORT = process.env.PORT;
+
+const DB_URL = process.env.DB_URL;
+
+const connectBD = () => {
+  const db = mongoose.connect(DB_URL);
+  app.listen(PORT, () =>
+   console.log(`Listen to -- http://localhost:${PORT}`)
+  );
+  console.log('DB Connected');
 };
-connectBDFunc();
 
-app.post("/api/post", (req, res) => {
-  try {
-    const { firstName, lastName, email } = req.body;
-
-    res.send(`My full Name is ${firstName} ${lastName}`);
-  } catch (error) {
-    res.send(`Error this is Post req -- $(error)`);
-  }
-});
+connectBD();
