@@ -11,9 +11,10 @@ app.use(express.json());
 
 // read -- get
 
-app.get("/api/get", (req, res) => {
+app.get("/api/get", async (req, res) => {
   try {
-    res.status(200).send("Hello world");
+    const getAll = await PostModel.find();
+    res.status(200).send(getAll);
   } catch (error) {
     res.status(501).send(error);
   }
