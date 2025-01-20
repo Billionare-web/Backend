@@ -7,18 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-// http CRUM -- create read , update, delete
-
-// read -- get
-
-app.get("/api/get", async (req, res) => {
-  try {
-    const getAll = await PostModel.find();
-    res.status(200).send(getAll);
-  } catch (error) {
-    res.status(501).send(error);
-  }
-});
+app.use('/api/post', require('./routes/post.route'));
 
 app.post('/api/post', async (req, res) => {
 try {
