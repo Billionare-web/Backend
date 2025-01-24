@@ -1,26 +1,40 @@
-const express = require("express");
-const { default: mongoose } = require("mongoose");
+const express = require('express');
+const { default: mongoose } = require('mongoose');
 const fileUpload = require('express-fileupload');
 const app = express();
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 
+// Routes
+
+// const { default: requestTime } = require('./middlewares/request-time');
+
+// app.use(requestTime);
+app.use(cookieParser({}));
 app.use(express.json());
-app.use(express.static());
+app.use(express.static('static'));
 app.use(fileUpload());
 
-app.use("/api/post", require("./routes/post.route"));
+app.use('/api/post', require('./routes/post.route'));
 
-app.use('/api/auth', require('./routes/auth.route'))
+app.use('/api/auth', require('./routes/auth.route'));
 
-const DB_URL = process.env.DB_URL;
+const DB_URL__MONGODB = process.env.DB_URL;
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 809
+0;
 
-const connectBD = () => {
-  const db = mongoose.connect(DB_URL);
-  app.listen(PORT, () => console.log(`Listen to -- http://localhost:${PORT}`));
-  console.log("DB Connected");
+const dbConnected = async () => {
+  try {
+    await mongoose
+      .connect(DB_URL__MONGODB)
+      .then(() => console.log('DB connected'));
+    app.listen(PORT, () =>
+      console.log(`Listening on -- http://localhost:${PORT}`)
+    );
+  } catch (error) {
+    console.log(`Error connecting with DB - ${error}`);
+  }
 };
-
-connectBD();
+dbConnected();

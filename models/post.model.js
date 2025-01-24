@@ -1,9 +1,9 @@
 const { Schema, model } = require('mongoose');
 
-const PostSchema = new Schema({
-    title: {type: String, required: true},
-    body: {type: String, required: true},
-    picture: {type: String },
+const PostModel = new Schema({
+  title: { type: String, required: true },
+  body: { type: String, required: true },
+  picture: { type: String },
 });
 
-module.exports = model('Post', PostSchema);
+module.exports = model('Post', PostModel);

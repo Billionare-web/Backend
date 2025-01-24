@@ -1,25 +1,29 @@
 {
-  "name": "back",
+  "name": "backend_project",
   "version": "1.0.0",
-  "description": "Backend project",
+  "description": "Full Stack project",
   "main": "app.js",
   "scripts": {
-    "test": "Node Js",
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [
-    "Exspress",
-    "project"
+    "Node",
+    "JS",
+    "express",
+    "JS"
   ],
   "author": "Samaritdinov Muhammadrasul",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-fileupload": "^1.5.1",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.12.0",
     "mongoose": "^8.9.2",
     "nodemon": "^3.1.9",
